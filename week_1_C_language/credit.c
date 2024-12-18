@@ -1,3 +1,10 @@
+/*
+Program that prompts the user for a credit card number and then reports (via printf) whether it is a valid American Express, MasterCard, or Visa card number, per the definitions of each’s format herein. 
+The program’s last line of output should be AMEX\n or MASTERCARD\n or VISA\n or INVALID\n. 
+For simplicity, you may assume that the user’s input will be entirely numeric (i.e., devoid of hyphens, as might be printed on an actual card) and that it won’t have leading zeroes.
+*/
+
+
 #include <cs50.h>
 #include <stdio.h>
 
