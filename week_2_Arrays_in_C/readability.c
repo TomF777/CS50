@@ -16,9 +16,8 @@ index = 0.0588 * L - 0.296 * S - 15.8
 where L is the average number of letters per 100 words in the text, and S is the average number of sentences per 100 words in the text.
 
 */
-
-#include <ctype.h>
 #include <cs50.h>
+#include <ctype.h>
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
@@ -38,19 +37,22 @@ int main(void)
     int words = count_words(text);
     int sentences = count_sentences(text);
 
-    //printf("number of letters: %i\n", count_letters(text));
-    //printf("number of words: %i\n", count_words(text));
-    //printf("number of sentences: %i\n", count_sentences(text));
+    // printf("number of letters: %i\n", count_letters(text));
+    // printf("number of words: %i\n", count_words(text));
+    // printf("number of sentences: %i\n", count_sentences(text));
 
     // Compute the Coleman-Liau index
-    int index = (int)round(0.0588 * ((float)letters / (float)words * 100.0) - 0.296 * ((float)sentences / (float)words * 100.0) - 15.8);
+    int index = (int) round(0.0588 * ((float) letters / (float) words * 100.0) -
+                            0.296 * ((float) sentences / (float) words * 100.0) - 15.8);
 
     // Print the grade level
     // printf("Level: %i\n", index);
-    if (index < 1) printf("Before Grade 1\n");
-    else if (index > 16) printf("Grade 16+\n");
-    else printf("Grade %i\n", index);
-
+    if (index < 1)
+        printf("Before Grade 1\n");
+    else if (index > 16)
+        printf("Grade 16+\n");
+    else
+        printf("Grade %i\n", index);
 }
 
 // *********************
@@ -99,11 +101,14 @@ int count_sentences(string text)
 
     for (int i = 0, len = strlen(text); i < len; i++)
     {
-        // check if symbol in text array is a '.' '!' or '?' and succeeded character is a space or NULL(end of string)
-        if ((text[i] == '?' || text[i] == '!' || text[i] == '.') && (text[i + 1] == '\0' || isspace(text[i + 1]) ))
+        // check if symbol in text array is a '.' '!' or '?' and succeeded character is a space or
+        // NULL(end of string)
+        if ((text[i] == '?' || text[i] == '!' || text[i] == '.') &&
+            (text[i + 1] == '\0' || isspace(text[i + 1])))
         {
             sentences++;
         }
     }
     return sentences;
 }
+
