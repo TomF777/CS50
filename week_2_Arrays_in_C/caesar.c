@@ -2,7 +2,8 @@
 Caesar used to “encrypt” (i.e., conceal in a reversible way) confidential messages by shifting each letter therein by some number of places. 
 For instance, he might write A as B, B as C, C as D, …, and, wrapping around alphabetically, Z as A. 
 And so, to say HELLO to someone, Caesar might write IFMMP instead. 
-Upon receiving such messages from Caesar, recipients would have to “decrypt” them by shifting letters in the opposite direction by the same number of places.
+Upon receiving such messages from Caesar, recipients would have to “decrypt” them by shifting letters in the opposite direction
+by the same number of places.
 
 Formally, Caesar’s algorithm (i.e., cipher) encrypts messages by “rotating” each letter by 'k' positions.
 More formally, if 'p' is some plaintext (i.e., an unencrypted message), 'pi' is the 'ith' character in 'p'
@@ -14,7 +15,8 @@ ci = (pi + k) % 26
 - Program must output "plaintext:  " and then prompt the user for a string of plaintext.
 - Program must output "ciphertext: " followed by the plaintext’s corresponding ciphertext, 
   with each alphabetical character in the plaintext “rotated” by k positions; non-alphabetical characters should be outputted unchanged.
-- Program must preserve case: capitalized letters, though rotated, must remain capitalized letters; lowercase letters, though rotated, must remain lowercase letters.
+- Program must preserve case: capitalized letters, though rotated, must remain capitalized letters;
+  lowercase letters, though rotated, must remain lowercase letters.
 */
 
 #include <cs50.h>
