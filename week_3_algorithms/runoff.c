@@ -1,5 +1,5 @@
 /*
-See README_RUNOFF.MD
+See README_runoff.md
 */
 
 #include <cs50.h>
