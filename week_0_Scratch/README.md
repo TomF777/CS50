@@ -12,3 +12,5 @@ Here are some pictures from the the game
 <img src="https://github.com/user-attachments/assets/2d167c7c-8c31-439a-8e64-54176c21bd7a" width=600>
 
 <img src="https://github.com/user-attachments/assets/8cb72335-77d8-4420-9707-8385c063e651" width=600>
+
+(https://raw.githubusercontent.com/TomF777/CS50/week_0_Scratch/main/path/to/Scratch Project.mp4)
