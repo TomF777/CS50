@@ -2,7 +2,7 @@ You already know about plurality elections, which follow a very simple algorithm
 
 But the plurality vote does have some disadvantages. What happens, for instance, in an election with three candidates, and the ballots below are cast?
 
-
+<img src="C:\Users\Dell\OneDrive\Pictures\fptp_ballot_1.png" width=600>
 
 Five ballots, tie betweeen Alice and Bob
 
