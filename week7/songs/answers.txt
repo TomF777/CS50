@@ -1,0 +1,16 @@
+According to the formula given by Spotify I would calculate in first run the audio aura as follows:
+SELECT AVG(energy), AVG(valence), AVG(danceability) FROM songs;
+
+This query will result as follows:
++-------------+--------------+-------------------+
+| AVG(energy) | AVG(valence) | AVG(danceability) |
++-------------+--------------+-------------------+
+| 0.65906     | 0.484443     | 0.71646           |
++-------------+--------------+-------------------+
+
+
+In general I would characterize the Audio Aura calculated this way as moderate in energy and having quite high level of danceability. In total the 'valence' can be estimated as average.
+This way of calculation may be not representative because it calculates avarge of all songs.
+Better approach would be to consider median or mood (as the most frequent number — that is, the number that occurs the highest number of times -  quote from medium.com) for each song's trait.
+I would also consider to estimate on songs from more than one year.
+And finally weigts for song's traits could be introduced to better calculate the aura.

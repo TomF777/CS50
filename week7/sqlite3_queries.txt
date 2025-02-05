@@ -1,0 +1,449 @@
+.schema table_name
+
+
+
+SELECT * FROM favorites;
++----------------------+----------+--------------+
+|      Timestamp       | language |   problem    |
++----------------------+----------+--------------+
+| 10/15/2024 3:40:19   | Scratch  | Rolling Ball |
+| 10/15/2024 4:41:20   | Python   | Hello,World  |
+| 10/15/2024 8:16:02   | C        | Tideman      |
+| 10/15/2024 10:27:11  | Python   | Tideman      |
+| 10/15/2024 10:28:45  | Python   | Mario        |
+| 10/15/2024 10:29:34  | Python   | Credit       |
+| 10/15/2024 10:33:34  | Python   | Filter       |
+| 10/15/2024 11:02:34  | Python   | Filter       |
+| 10/15/2024 11:10:145 | Python   | Tideman      |
+...
+
+SELECT COUNT(*) from favorites;
++----------+
+| COUNT(*) |
++----------+
+| 18       |
++----------+
+
+
+SELECT count(*) FROM favorites where language = 'Python';
++----------+
+| count(*) |
++----------+
+| 14       |
++----------+
+
+
+SELECT count(*) FROM favorites where language = 'Python' and (problem = 'Filter' OR problem='Tideman' );
++----------+
+| count(*) |
++----------+
+| 4        |
++----------+
+
+
+SELECT * FROM favorites where language = 'Python' and problem LIKE 'Hello,%';
++---------------------+----------+--------------+
+|      Timestamp      | language |   problem    |
++---------------------+----------+--------------+
+| 10/15/2024 4:41:20  | Python   | Hello,World  |
+| 10/15/2024 11:12:56 | Python   | Hello,World  |
+| 10/15/2024 11:26:47 | Python   | Hello, World |
++---------------------+----------+--------------+
+
+
+select DISTINCT language from favorites;
++----------+
+| language |
++----------+
+| Scratch  |
+| Python   |
+| C        |
++----------+
+
+
+select language, COUNT(*) from favorites GROUP BY language;
++----------+----------+
+| language | COUNT(*) |
++----------+----------+
+| C        | 3        |
+| Python   | 14       |
+| Scratch  | 1        |
++----------+----------+
+
+
+select language, COUNT(*) from favorites GROUP BY language ORDER BY COUNT(*) ASC;
++----------+----------+
+| language | COUNT(*) |
++----------+----------+
+| Scratch  | 1        |
+| C        | 3        |
+| Python   | 14       |
++----------+----------+
+
+
+select language, COUNT(*) from favorites GROUP BY language ORDER BY COUNT(*) DESC;
++----------+----------+
+| language | COUNT(*) |
++----------+----------+
+| Python   | 14       |
+| C        | 3        |
+| Scratch  | 1        |
++----------+----------+
+
+
+SELECT language, COUNT(*) AS number  FROM favorites GROUP BY language ORDER BY number DESC;
++----------+--------+
+| language | number |
++----------+--------+
+| Python   | 14     |
+| C        | 3      |
+| Scratch  | 1      |
++----------+--------+
+
+
+select language, COUNT(*) AS number  FROM favorites GROUP BY language ORDER BY number DESC LIMIT 1;
++----------+--------+
+| language | number |
++----------+--------+
+| Python   | 14     |
++----------+--------+
+
+
+INSERT INTO favorites (language, problem) VALUES('SQL', 'Random problem');
+
+| 10/15/2024 11:28:57  | Python   | Mario          |
+| 10/15/2024 11:29:36  | Python   | Runoff         |
+| NULL                 | SQL      | Random problem |
++----------------------+----------+----------------+
+
+
+DELETE FROM favorites WHERE Timestamp IS NULL;
+
+UPDATE favorites SET language = 'SQL', problem = 'Random task' WHERE Timestamp = '10/15/2024 11:28:57';
+...
+| 10/15/2024 11:26:47  | Python   | Hello, World |
+| 10/15/2024 11:28:57  | SQL      | Random task  |
+| 10/15/2024 11:29:36  | Python   | Runoff       |
++----------------------+----------+--------------+
+
+
+
+==========================================================================================================
+
+SELECT * FROM ratings WHERE rating >= 6.0 LIMIT 10;
++---------+--------+-------+
+| show_id | rating | votes |
++---------+--------+-------+
+| 62614   | 6.7    | 376   |
+| 63881   | 7.9    | 1155  |
+| 63962   | 7.9    | 4264  |
+| 65269   | 7.6    | 127   |
+| 65270   | 7.4    | 29    |
+| 65272   | 6.8    | 3355  |
+| 65273   | 6.9    | 209   |
+| 65274   | 7.1    | 140   |
+| 65276   | 7.2    | 70    |
+| 65277   | 8.0    | 32    |
++---------+--------+-------+
+
+
+SELECT * FROM shows WHERE id IN
+(SELECT show_id FROM ratings WHERE rating >= 6.0)
+LIMIT 10;
++-------+-----------------------------+------+----------+
+|  id   |            title            | year | episodes |
++-------+-----------------------------+------+----------+
+| 62614 | Zeg 'ns Aaa                 | 1981 | 227      |
+| 63881 | Catweazle                   | 1970 | 26       |
+| 63962 | UFO                         | 1970 | 26       |
+| 65269 | Ace of Wands                | 1970 | 46       |
+| 65270 | The Adventures of Don Quick | 1970 | 6        |
+| 65272 | All My Children             | 1970 | 9699     |
+| 65273 | Archie's Funhouse           | 1970 | 23       |
+| 65274 | Arnie                       | 1970 | 48       |
+| 65276 | Barefoot in the Park        | 1970 | 12       |
+| 65277 | The Best of Everything      | 1970 | 115      |
++-------+-----------------------------+------+----------+
+
+
+SELECT title FROM shows WHERE id IN
+(SELECT show_id FROM ratings WHERE rating >= 6.0)
+ LIMIT 10;
++-----------------------------+
+|            title            |
++-----------------------------+
+| Zeg 'ns Aaa                 |
+| Catweazle                   |
+| UFO                         |
+| Ace of Wands                |
+| The Adventures of Don Quick |
+| All My Children             |
+| Archie's Funhouse           |
+| Arnie                       |
+| Barefoot in the Park        |
+| The Best of Everything      |
++-----------------------------+
+
+
+SELECT * FROM shows JOIN ratings ON shows.id = ratings.show_id WHERE rating >= 6.0 LIMIT 10;
++-------+-----------------------------+------+----------+---------+--------+-------+
+|  id   |            title            | year | episodes | show_id | rating | votes |
++-------+-----------------------------+------+----------+---------+--------+-------+
+| 62614 | Zeg 'ns Aaa                 | 1981 | 227      | 62614   | 6.7    | 376   |
+| 63881 | Catweazle                   | 1970 | 26       | 63881   | 7.9    | 1155  |
+| 63962 | UFO                         | 1970 | 26       | 63962   | 7.9    | 4264  |
+| 65269 | Ace of Wands                | 1970 | 46       | 65269   | 7.6    | 127   |
+| 65270 | The Adventures of Don Quick | 1970 | 6        | 65270   | 7.4    | 29    |
+| 65272 | All My Children             | 1970 | 9699     | 65272   | 6.8    | 3355  |
+| 65273 | Archie's Funhouse           | 1970 | 23       | 65273   | 6.9    | 209   |
+| 65274 | Arnie                       | 1970 | 48       | 65274   | 7.1    | 140   |
+| 65276 | Barefoot in the Park        | 1970 | 12       | 65276   | 7.2    | 70    |
+| 65277 | The Best of Everything      | 1970 | 115      | 65277   | 8.0    | 32    |
++-------+-----------------------------+------+----------+---------+--------+-------+
+
+
+SELECT title, rating FROM shows JOIN ratings ON shows.id = ratings.show_id WHERE rating >= 6.0 LIMIT 10;
++-----------------------------+--------+
+|            title            | rating |
++-----------------------------+--------+
+| Zeg 'ns Aaa                 | 6.7    |
+| Catweazle                   | 7.9    |
+| UFO                         | 7.9    |
+| Ace of Wands                | 7.6    |
+| The Adventures of Don Quick | 7.4    |
+| All My Children             | 6.8    |
+| Archie's Funhouse           | 6.9    |
+| Arnie                       | 7.1    |
+| Barefoot in the Park        | 7.2    |
+| The Best of Everything      | 8.0    |
++-----------------------------+--------+
+
+
+
+select * FROM genres LIMIT 10;
++---------+-----------+
+| show_id |   genre   |
++---------+-----------+
+| 62614   | Comedy    |
+| 63881   | Adventure |
+| 63881   | Comedy    |
+| 63881   | Family    |
+| 63962   | Action    |
+| 63962   | Sci-Fi    |
+| 65269   | Family    |
+| 65269   | Fantasy   |
+| 65270   | Comedy    |
+| 65270   | Sci-Fi    |
++---------+-----------+
+
+
+SELECT genre FROM genres WHERE show_id = (SELECT id FROM shows WHERE title = 'Catweazle');
++-----------+
+|   genre   |
++-----------+
+| Adventure |
+| Comedy    |
+| Family    |
++-----------+
+
+
+
+SELECT * FROM shows JOIN genres ON shows.id = genres.show_id WHERE id = 63881;
++-------+-----------+------+----------+---------+-----------+
+|  id   |   title   | year | episodes | show_id |   genre   |
++-------+-----------+------+----------+---------+-----------+
+| 63881 | Catweazle | 1970 | 26       | 63881   | Adventure |
+| 63881 | Catweazle | 1970 | 26       | 63881   | Comedy    |
+| 63881 | Catweazle | 1970 | 26       | 63881   | Family    |
++-------+-----------+------+----------+---------+-----------+
+
+
+SELECT title, genre FROM shows JOIN genres ON shows.id = genres.show_id WHERE id = 63881;
++-----------+-----------+
+|   title   |   genre   |
++-----------+-----------+
+| Catweazle | Adventure |
+| Catweazle | Comedy    |
+| Catweazle | Family    |
++-----------+-----------+
+
+============================================================================================
+MANY to MANY RELATIONSHIP
+
+SELECT * FROM shows WHERE title = 'The Office';
++----------+------------+------+----------+
+|    id    |   title    | year | episodes |
++----------+------------+------+----------+
+| 112108   | The Office | 1995 | 6        |
+| 290978   | The Office | 2001 | 14       |
+| 386676   | The Office | 2005 | 188      |
+| 1791001  | The Office | 2010 | 30       |
+| 2186395  | The Office | 2012 | 8        |
+| 8305218  | The Office | 2019 | 28       |
+| 10193026 | The Office | 2024 | 8        |
+| 20877972 | The Office | 2022 | 20       |
++----------+------------+------+----------+
+
+
+SELECT * FROM shows WHERE title = 'The Office' AND year = 2005;
++--------+------------+------+----------+
+|   id   |   title    | year | episodes |
++--------+------------+------+----------+
+| 386676 | The Office | 2005 | 188      |
++--------+------------+------+----------+
+
+
+SELECT id FROM shows WHERE title = 'The Office' AND year = 2005;
++--------+
+|   id   |
++--------+
+| 386676 |
++--------+
+
+SELECT person_id FROM stars WHERE show_id =
+(SELECT id FROM shows WHERE title = 'The Office' AND year = 2005);
++-----------+
+| person_id |
++-----------+
+| 136797    |
+| 278979    |
+| 1024677   |
+| 933988    |
+| 1534715   |
+| 1580911   |
+| 1526554   |
+| 1526554   |
+| 1526554   |
+| 281212    |
+| 809613    |
+| 809613    |
+| 105588    |
++-----------+
+
+
+SELECT name from people WHERE id in
+(SELECT person_id FROM stars WHERE show_id =
+(SELECT id FROM shows WHERE title = 'The Office' AND year = 2005));
++--------------------+
+|        name        |
++--------------------+
+| Creed Bratton      |
+| Steve Carell       |
+| Jenna Fischer      |
+| Kate Flannery      |
+| Phyllis Smith      |
+| Rainn Wilson       |
+| John Krasinski     |
+| Angela Kinsey      |
+| Leslie David Baker |
+| Brian Baumgartner  |
++--------------------+
+
+
+SELECT title FROM shows WHERE id IN
+(SELECT show_id FROM stars WHERE person_id =
+(SELECT id FROM people WHERE name = 'Steve Carell'));
++------------------------------------+
+|               title                |
++------------------------------------+
+| The Dana Carvey Show               |
+| Over the Top                       |
+| Watching Ellie                     |
+| Come to Papa                       |
+| The Office                         |
+| Entertainers with Byron Allen      |
+| The Naked Trucker and T-Bones Show |
+| ES.TV HD                           |
+| Mark at the Movies                 |
+| Inside Comedy                      |
+| Rove LA                            |
+| Metacafe Unfiltered                |
+| Fabrice Fabrice Interviews         |
+| Riot                               |
+| Séries express                     |
+| Hollywood Sessions                 |
+| First Impressions with Dana Carvey |
+| Space Force                        |
+| Some Good News                     |
+| The Office: Superfan Episodes      |
++------------------------------------+
+
+
+SELECT title FROM shows
+JOIN stars ON shows.id = stars.show_id
+JOIN people ON stars.person_id = people.id
+WHERE name = 'Steve Carell';
++------------------------------------+
+|               title                |
++------------------------------------+
+| The Dana Carvey Show               |
+| The Dana Carvey Show               |
+| Over the Top                       |
+| Watching Ellie                     |
+| Come to Papa                       |
+| The Office                         |
+| Entertainers with Byron Allen      |
+| The Naked Trucker and T-Bones Show |
+| Some Good News                     |
+| Some Good News                     |
+| ES.TV HD                           |
+| Mark at the Movies                 |
+| Inside Comedy                      |
+| Rove LA                            |
+| Metacafe Unfiltered                |
+| Fabrice Fabrice Interviews         |
+| The Office: Superfan Episodes      |
+| The Office: Superfan Episodes      |
+| The Office: Superfan Episodes      |
+| Riot                               |
+| Séries express                     |
+| Hollywood Sessions                 |
+| First Impressions with Dana Carvey |
+| Space Force                        |
++------------------------------------+
+
+
+SELECT title FROM shows, stars, people
+   ...> WHERE shows.id = stars.show_id
+   ...> AND people.id = stars.person_id
+   ...> AND name = 'Steve Carell';
++------------------------------------+
+|               title                |
++------------------------------------+
+| The Dana Carvey Show               |
+| The Dana Carvey Show               |
+| Over the Top                       |
+| Watching Ellie                     |
+| Come to Papa                       |
+| The Office                         |
+| Entertainers with Byron Allen      |
+| The Naked Trucker and T-Bones Show |
+| Some Good News                     |
+| Some Good News                     |
+| ES.TV HD                           |
+| Mark at the Movies                 |
+| Inside Comedy                      |
+| Rove LA                            |
+| Metacafe Unfiltered                |
+| Fabrice Fabrice Interviews         |
+| The Office: Superfan Episodes      |
+| The Office: Superfan Episodes      |
+| The Office: Superfan Episodes      |
+| Riot                               |
+| Séries express                     |
+| Hollywood Sessions                 |
+| First Impressions with Dana Carvey |
+| Space Force                        |
++------------------------------------+
+
+
+==================================================================================
+*****   INDEXES   *******
+==================================================================================
+
+CREATE INDEX title_index ON shows(title);
+
+CREATE INDEX name_index ON People(name);
+CREATE INDEX person_index ON stars(person_id);
+
+
