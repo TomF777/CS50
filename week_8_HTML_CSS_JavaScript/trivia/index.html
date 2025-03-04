@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!-- Both files index.html and index2.html are correct solutions for Trivia task -->
+<!-- index.html uses jQuery-->
+<!-- index2.html uses event listener with html -->
+ 
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+        <title>Trivia!</title>
+        <script>
+        /* using jQuery */
+        $(document).ready(function() {
+
+            $('.correct').click(function () {
+                $('#result1').html('Correct');
+                $(this).css('background-color', 'green');
+                });
+
+            $('.incorrect').click(function () {
+                $('#result1').html('Incorrect');
+                $(this).css('background-color', 'red');
+                });
+
+            $('#check').click(function () {
+                var answer = $('input').val();
+                if (answer == 'Rome') {
+                    $('input').css('background-color', 'green');
+                    $('#result2').html('Correct');
+                } else {
+                    $('input').css('background-color', 'red');
+                    $('#result2').html('Incorrect');
+                }
+            });
+
+        });
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3>What is the capital of Germany?</h3>
+
+                <button class="incorrect">Dusseldorf</button>
+                <button class="incorrect">Hamburg</button>
+                <button class="correct">Berlin</button>
+                <button class="incorrect">Munich</button>
+                <button class="incorrect">Stuttgart</button>
+
+                <p id="result1"></p>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>What is the capital of Italy?</h3>
+                <input type="text"></input>
+                <button id="check">Check Answer</button>
+
+                <p id="result2"></p>
+            </div>
+        </div>
+    </body>
+</html>

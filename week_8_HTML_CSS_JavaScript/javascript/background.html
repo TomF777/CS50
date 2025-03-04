@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<!-- Demonstrates programmatic changes to style -->
+
+<html lang="en">
+    <head>
+        <title>background</title>
+    </head>
+    <body>
+        <button id="red">R</button>
+        <button id="green">G</button>
+        <button id="blue">B</button>
+        <script>
+
+            let body = document.querySelector('body');
+            let btn_r = document.querySelector('#red');
+            let btn_g = document.querySelector('#green');
+            let btn_b = document.querySelector('#blue');
+
+            document.querySelector('#red').addEventListener('click', function() {
+                body.style.backgroundColor = 'red';
+                btn_r.style.backgroundColor = 'yellow';
+                btn_g.style.backgroundColor = 'LightGrey';
+                btn_b.style.backgroundColor = 'LightGrey';
+            });
+            document.querySelector('#green').addEventListener('click', function() {
+                body.style.backgroundColor = 'green';
+                btn_r.style.backgroundColor = 'LightGrey';
+                btn_g.style.backgroundColor = 'yellow';
+                btn_b.style.backgroundColor = 'LightGrey';
+            });
+            document.querySelector('#blue').addEventListener('click', function() {
+                body.style.backgroundColor = 'blue';
+                btn_r.style.backgroundColor = 'LightGrey';
+                btn_g.style.backgroundColor = 'LightGrey';
+                btn_b.style.backgroundColor = 'yellow';
+            });
+
+        </script>
+    </body>
+</html>
