@@ -1,7 +1,7 @@
 
 **enter database**
 
-sqlite songs.db
+sqlite3 songs.db
 
 **after entering db**
 **shows tables structure in database**
