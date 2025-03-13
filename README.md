@@ -1,9 +1,9 @@
 This is CS50 (aka CS50x through edX), Harvard University's introduction to the intellectual enterprises of computer science and the art of programming.
 
-All program codes in this repo were developed by myself as a solutions for problem tasks during the CS50 course.   
+This repo includes codes which were developed by myself as a solutions for problem tasks during the CS50 course.   
 <br>
 <br>
-**CS50 library usage:**
+**CS50 library usage for C language:**
 
 To use examples with CS50 library, download latest version:
 https://github.com/cs50/libcs50/releases
