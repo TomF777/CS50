@@ -1,4 +1,4 @@
-This is CS50 (aka CS50x through edX), Harvard University's introduction to the intellectual enterprises of computer science and the art of programming.
+**This is CS50 (aka CS50x through edX), Harvard University's introduction to the intellectual enterprises of computer science and the art of programming.**
 
 This repo includes codes which were developed by myself as a solutions for problem tasks during the CS50 course.   
 <br>
