@@ -1,2 +1,3 @@
-#start Flask with command:
-flask run
+**start Flask with command**
+
+`flask run`
