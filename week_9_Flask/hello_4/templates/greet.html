@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    Hello,
+    {% if name %}
+        {{ name }} from flask
+    {% else %}
+        from greet
+    {% endif %}
+
+{% endblock %}

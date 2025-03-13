@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+
+{% block main %}
+
+    <h3>Users' account balance</h3>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+            <th>Symbol</th>
+            <th>Shares</th>
+            <th>Price</th>
+            <th>TOTAL</th>
+        </tr>
+      </thead>
+      <tbody >
+
+        {% for share in shares %}
+        <tr>
+            <td>{{ share.share_symbol }}</td>
+            <td>{{ share.total_shares }}</td>
+            <td>{{ share.price | usd }}</td>
+            <td>{{ share.shares_value | usd }}</td>
+        </tr>
+        {% endfor %}
+        <tr class="table-warning">
+            <td></td>
+            <td></td>
+            <th>Cash</td>
+            <th>{{ user_cash }}$</td>
+        </tr>
+        <tr class="table-warning">
+            <td></td>
+            <td></td>
+            <th>Total</td>
+            <th>{{ grand_total }}$</td>
+        </tr>
+      </tbody>
+    </table>
+
+{% endblock %}

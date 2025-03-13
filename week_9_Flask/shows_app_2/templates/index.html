@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <input autocomplete="off" autofocus placeholder="Query" type="search">
+    <ul></ul>
+
+    <script>
+        let input = document.querySelector('input');
+        // listener for user input event inside input tag. Could also be keypress or keydown
+        input.addEventListener('input', async function() {
+            // make http request from javascript to the server
+            let response = await fetch('/search?q=' + input.value);
+
+            // wait for the response from the server
+            let shows = await response.json();
+
+            let html = '';
+            for (let show of shows) {
+                html += '<li>' + show.title + '</li>';
+            }
+
+            document.querySelector('ul').innerHTML = html;
+            
+        });
+    </script>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+
+{% block main %} 
+
+    <h3>Selling shares</h3>
+    <p></p>
+
+    <form action="/sell" method="POST">
+
+        <div class="form-group">
+            <select class="form-control" name="symbol" required>
+                <option disabled selected value="">Select Share to Sell</option>
+                {% for symbol in symbols %}
+                    <option value="{{ symbol }}">{{ symbol }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <p></p>
+
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="shares" placeholder="Shares" type="number" min="1">
+        </div>
+        <p></p>
+        <button class="btn btn-primary" type="submit">Sell</button>
+    </form>
+{% endblock %}
+
