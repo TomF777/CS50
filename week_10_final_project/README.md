@@ -45,6 +45,12 @@ However it would be annoying for a human user to observe (and count) how many an
 \
 **Running the app**
 
+configure virtual environment:
+```
+python -m venv my-venv
+source my-venv/Scripts/activate
+```
+
 Start Flask app:
 ```
 $ flask run
