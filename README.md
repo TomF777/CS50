@@ -1,6 +1,6 @@
 **This is CS50 (aka CS50x through edX), Harvard University's introduction to the intellectual enterprises of computer science and the art of programming.**
 
-This repo includes codes which were developed by myself as a solutions for problem tasks during the CS50 course.   
+This repo includes codes which were developed by myself as  solutions for problem tasks during the CS50 course.   
 <br>
 <br>
 **CS50 library usage for C language:**
@@ -18,12 +18,14 @@ Copy cs50.h to location path of the MinGW-w64 include:  _...InstallationFolder/M
 Run commands:
 
 1. compile:
-   
+
+   ```
     _gcc -o filename filename.c cs50.c_
-   
+   ```
+
     It creates _filename.exe_ file.
 
 3. execute:
-   
+   ```
     _./filename.exe_
-
+    ```
